@@ -1,70 +1,201 @@
-# Getting Started with Create React App
+# 📚 KitabXano Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern React frontend for the KitabXano (Book Treasure) application. A comprehensive platform for managing personal book libraries and social interactions around reading.
 
-## Available Scripts
+## 🎯 Features
 
-In the project directory, you can run:
+- ✅ User Authentication (Login/Sign Up)
+- ✅ Personal Book Library (Bookshelf)
+- ✅ Add/Remove Books from Bookshelf
+- ✅ Rate Books (1-5 stars)
+- ✅ Sort Books (by title, author, rating, date)
+- ✅ Filter Books by Rating
+- ✅ Create and View Posts
+- ✅ Like/Unlike Posts
+- ✅ User Profiles
+- ✅ Real-time Feed
+- ✅ Responsive Design
+- ✅ Error Handling
+- ✅ Uzbek Language Support
+- ✅ Book-themed UI (Brown color scheme)
 
-### `npm start`
+## 📁 Project Structure
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+social-network-frontend/
+├── public/
+│   ├── index.html
+│   ├── manifest.json
+│   └── robots.txt
+├── src/
+│   ├── components/
+│   │   ├── UserCard.js           # User display component
+│   │   ├── UserCard.css
+│   │   ├── PostCard.js           # Post display component
+│   │   ├── PostCard.css
+│   │   ├── BookCard.js           # Book display component
+│   │   └── BookCard.css
+│   ├── contexts/
+│   │   └── AuthContext.js        # Authentication context
+│   ├── pages/
+│   │   ├── Home.js              # Home/Feed page
+│   │   ├── Home.css
+│   │   ├── Bookshelf.js         # User's bookshelf page
+│   │   ├── Bookshelf.css
+│   │   ├── Login.js             # Login/Sign up page
+│   │   └── Auth.css
+│   ├── services/
+│   │   └── api.js               # API calls & endpoints
+│   ├── App.js                   # Main app component with routing
+│   ├── App.css                  # Global styles
+│   ├── index.js
+│   ├── index.css
+│   └── setupTests.js
+├── package.json
+├── tsconfig.json
+└── README.md
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🚀 Installation & Setup
 
-### `npm test`
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- Backend server running on `http://localhost:5000`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Install Dependencies
 
-### `npm run build`
+```bash
+cd social-network-frontend
+npm install
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Start Development Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The application will open at `http://localhost:3000`
 
-### `npm run eject`
+## 📖 Usage Guide
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 1. **Authentication**
+- Visit the Login page
+- Either sign in with existing credentials or create a new account
+- Fill in email, password, and optional username/full name for sign up
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 2. **Home Feed**
+- After login, you'll see the Home page with recent posts
+- Create new posts with text and optional images
+- Like/unlike posts from other users
+- View all posts in a real-time feed
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 3. **Bookshelf**
+- Click the "📖 Kitoblar" (Books) button in the navigation
+- View all books in your personal library
+- Add new books to your collection
+- Rate books using the 5-star rating system
+- Remove books from your shelf
+- Sort books by: date added, title, author, or rating
+- Filter books by minimum rating (1-5 stars)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 4. **Navigation**
+- Use the top navbar to switch between Home and Bookshelf pages
+- Click your user ID to view profile information
+- Click "Chiqish" (Logout) to sign out
 
-## Learn More
+## 🎨 Design & Styling
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Color Scheme**: Book-themed brown palette (#8b5a3c primary color)
+- **Responsive**: Mobile-friendly design
+- **Components**: Modular and reusable React components
+- **CSS**: Custom CSS for styling with smooth transitions
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 🔌 API Integration
 
-### Code Splitting
+The frontend communicates with the backend API at `http://localhost:5000/api`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### User API
+- `POST /api/users` - Create new user
+- `GET /api/users` - Get all users
+- `GET /api/users/:id` - Get user by ID
+- `PUT /api/users/:id` - Update user
+- `DELETE /api/users/:id` - Delete user
 
-### Analyzing the Bundle Size
+### Post API
+- `POST /api/posts/:userId` - Create post
+- `GET /api/posts` - Get all posts
+- `GET /api/posts/:id` - Get post by ID
+- `DELETE /api/posts/:id` - Delete post
+- `POST /api/posts/:id/like/:userId` - Like post
+- `POST /api/posts/:id/unlike/:userId` - Unlike post
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### Bookshelf API
+- `POST /api/bookshelves/:userId/books` - Add book to shelf
+- `GET /api/bookshelves/:userId` - Get user's bookshelf
+- `DELETE /api/bookshelves/:userId/books/:bookId` - Remove book
+- `PUT /api/bookshelves/:userId/books/:bookId/rating` - Update rating
 
-### Making a Progressive Web App
+## 🧠 State Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- **Authentication**: React Context API (AuthContext)
+- **Local State**: Component-level state with useState
+- **API State**: Managed within components
 
-### Advanced Configuration
+## 📦 Dependencies
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Key packages used:
+- `react` - UI framework
+- `react-dom` - React DOM rendering
+- `fetch` - API communication (built-in)
 
-### Deployment
+## 🚦 Development
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Available Scripts
 
-### `npm run build` fails to minify
+```bash
+# Start development server
+npm start
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Build for production
+npm build
+
+# Run tests
+npm test
+
+# Eject configuration (one-way operation)
+npm eject
+```
+
+## 🌐 Localization
+
+The application supports Uzbek language:
+- Login page: Uzbek labels and placeholders
+- Navigation: Uzbek menu items ("Uy" for Home, "Kitoblar" for Books)
+- Bookshelf: Uzbek sorting and filtering options
+- Error messages: Uzbek error handling
+
+## 🤝 Contributing
+
+To contribute to this project:
+1. Create a feature branch (`git checkout -b feature/amazing-feature`)
+2. Commit your changes (`git commit -m 'Add amazing feature'`)
+3. Push to the branch (`git push origin feature/amazing-feature`)
+4. Open a Pull Request
+
+## 📄 License
+
+This project is open source and available under the MIT License.
+
+## 🆘 Support
+
+For issues or questions:
+- Check the backend README.md for API documentation
+- Review the code comments in the components
+- Check browser console for error messages
+- Ensure the backend server is running on port 5000
+
+---
+
+**KitabXano** - Your Digital Book Treasure Chest 📚✨

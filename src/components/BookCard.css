@@ -1,0 +1,161 @@
+.book-card {
+  background: white;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  position: relative;
+}
+
+.book-card:hover {
+  box-shadow: 0 4px 16px rgba(139, 90, 60, 0.2);
+  transform: translateY(-2px);
+}
+
+.book-header {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.book-cover {
+  flex-shrink: 0;
+  width: 80px;
+  height: 120px;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.book-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #d4a574 0%, #8b5a3c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-icon {
+  font-size: 40px;
+  line-height: 1;
+}
+
+.book-info {
+  flex: 1;
+}
+
+.book-title {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
+}
+
+.book-author {
+  margin: 0 0 4px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.book-genre {
+  margin: 0 0 8px 0;
+  color: #999;
+  font-size: 13px;
+}
+
+.rating-section {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.rating-section label {
+  font-size: 13px;
+  color: #666;
+  font-weight: 500;
+}
+
+.stars {
+  display: flex;
+  gap: 4px;
+}
+
+.star {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.3;
+  transition: opacity 0.2s;
+}
+
+.star:hover {
+  opacity: 0.6;
+}
+
+.star.filled {
+  opacity: 1;
+}
+
+.star:disabled {
+  cursor: not-allowed;
+}
+
+.rating-text {
+  font-size: 12px;
+  color: #8b5a3c;
+  font-weight: 600;
+}
+
+.book-description {
+  background: #f9f9f9;
+  padding: 12px;
+  border-radius: 6px;
+  margin: 12px 0;
+}
+
+.book-description p {
+  margin: 0;
+  color: #555;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.book-meta {
+  margin: 8px 0 0 0;
+  color: #999;
+  font-size: 12px;
+}
+
+.btn-remove {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.btn-remove:hover {
+  background: #c82333;
+}
