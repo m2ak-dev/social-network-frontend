@@ -2,14 +2,17 @@ import React, { useState } from 'react';
 import './App.css';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Home from './pages/Home';
+import Bookshelf from './pages/Bookshelf';
 import Login from './pages/Login';
 
 const AppContent = () => {
   const { token, logout } = useAuth();
   const [refreshKey, setRefreshKey] = useState(0);
+  const [currentPage, setCurrentPage] = useState('home');
 
   const handleLoginSuccess = () => {
     setRefreshKey((k) => k + 1);
+    setCurrentPage('home');
   };
 
   return (
@@ -18,8 +21,24 @@ const AppContent = () => {
         <>
           <nav className="navbar">
             <div className="navbar-container">
-              <h1 className="app-title">� KitabXano</h1>
-              <p className="app-subtitle">Kitob Xazinasi - Book Treasure</p>
+              <div className="navbar-left">
+                <h1 className="app-title">📚 KitabXano</h1>
+                <p className="app-subtitle">Kitob Xazinasi - Book Treasure</p>
+                <div className="nav-links">
+                  <button 
+                    className={`nav-link ${currentPage === 'home' ? 'active' : ''}`}
+                    onClick={() => setCurrentPage('home')}
+                  >
+                    🏠 Home
+                  </button>
+                  <button 
+                    className={`nav-link ${currentPage === 'bookshelf' ? 'active' : ''}`}
+                    onClick={() => setCurrentPage('bookshelf')}
+                  >
+                    📖 Bookshelf
+                  </button>
+                </div>
+              </div>
               <div className="navbar-right">
                 <span className="user-id">User: {token}</span>
                 <button onClick={logout} className="btn-logout">
@@ -28,7 +47,7 @@ const AppContent = () => {
               </div>
             </div>
           </nav>
-          <Home />
+          {currentPage === 'home' ? <Home /> : <Bookshelf />}
         </>
       ) : (
         <Login onSuccess={handleLoginSuccess} />
