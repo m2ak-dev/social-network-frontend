@@ -5,6 +5,7 @@ const Sidebar = ({ currentPage, onNavigate }) => {
   const menuItems = [
     { id: 'home', label: '🏠 Home', icon: '🏠' },
     { id: 'bookshelf', label: '📚 Bookshelf', icon: '📚' },
+    { id: 'explore', label: '🌍 Explore', icon: '🌍' },
     { id: 'profile', label: '👤 Profile', icon: '👤' },
   ];
 

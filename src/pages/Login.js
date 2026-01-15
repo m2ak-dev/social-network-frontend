@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { userAPI } from '../services/api';
-import { useAuth } from '../contexts/AuthContext';
 import './Auth.css';
+import { useAuth } from '../contexts/AuthContext';
 
 const Login = ({ onSuccess }) => {
   const { login } = useAuth();
@@ -13,6 +12,8 @@ const Login = ({ onSuccess }) => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://kitabxano-backend.onrender.com/api';
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -20,29 +21,63 @@ const Login = ({ onSuccess }) => {
 
     try {
       if (isLogin) {
-        const response = await userAPI.getAllUsers();
-        const user = response.users.find((u) => u.email === email);
+        // Login request
+        const response = await fetch(`${API_BASE_URL}/users/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
 
-        if (!user || user.password !== password) {
-          throw new Error('Email yoki parol noto\'g\'ri');
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Login failed');
         }
 
-        login(user.id);
+        const data = await response.json();
+        login(data.token);
         onSuccess();
       } else {
+        // Registration request
         if (!email || !password || !username || !fullName) {
           throw new Error('Barcha maydonlar to\'ldirilishi kerak');
         }
 
-        const response = await userAPI.createUser({
-          email,
-          password,
-          username,
-          fullName,
+        const response = await fetch(`${API_BASE_URL}/users`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            username,
+            fullName,
+          }),
         });
 
-        login(response.user.id);
-        onSuccess();
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'Registration failed');
+        }
+
+        const data = await response.json();
+        
+        // Auto-login after registration
+        const loginResponse = await fetch(`${API_BASE_URL}/users/login`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        if (loginResponse.ok) {
+          const loginData = await loginResponse.json();
+          login(loginData.token);
+          onSuccess();
+        }
       }
     } catch (err) {
       setError(err.message);

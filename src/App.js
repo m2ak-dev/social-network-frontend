@@ -3,6 +3,7 @@ import './App.css';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Home from './pages/Home';
 import Bookshelf from './pages/Bookshelf';
+import Explore from './pages/Explore';
 import Profile from './pages/Profile';
 import Login from './pages/Login';
 import Sidebar from './components/Sidebar';
@@ -26,6 +27,7 @@ const AppContent = () => {
             <div className="page-container">
               {currentPage === 'home' && <Home />}
               {currentPage === 'bookshelf' && <Bookshelf />}
+              {currentPage === 'explore' && <Explore />}
               {currentPage === 'profile' && <Profile />}
             </div>
           </main>
